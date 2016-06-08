@@ -1,0 +1,61 @@
+ $(document).on("click", "#linkEdit", function () {
+
+        console.log("i cllicked linkkkkkkkkkkkkkkk");
+
+        var $td = $(this).closest('tr').children('td');
+
+        var assesment = $td.eq(0).text();
+        var mark = $td.eq(1).text();
+        var numMark=parseInt(mark);
+
+        alert(assesment + "           " + mark);
+        $('#txtarea').val(assesment);
+        $('#txtWeight').val(mark);
+
+
+********************************
+//var table = $("#temporyTable1"); //careful, it might not be f ound if the ClientID is different
+        
+        //console.log("inside neaaarrrrrrrr     "+table);
+
+        //table.children("tr").each(function () {
+
+        //    console.log("inside trrrrrrrrr     ");
+        //    var row = $(this);
+        //    //you can access row properties in javascript
+        //    row.children("td").each(function () {
+        //        var cell = $(this);
+        //        var asses = $(cell).text();
+        //        console.log(asses+"    ffffffffffffffffffff ");
+        //        //you can access cell properties like cell.html() or whatever
+        //    });
+        //});
+
+        //var table = $("#temporyTable1");
+
+        //for (var i = 0; i < $count; i++)
+        //{
+        //    var row = $(i);
+        //    console.log(row + "    roooooooooooooooo ");
+
+        //    var cell = $(row[i]).find("td:eq(1)").val();
+        //    console.log(cell + "    celllllllllllllll ");
+        //}
+       
+
+*****************************************
+$.ajax({
+            url: "/MarkingSchemes/findTotalIterationMark",
+            data: { typeId :$selectedIteration},
+            type: "POST",
+            dataType: "json",
+
+            success: function (data) {
+                $allocatedTotalMark = data.MarkValue;
+                console.log("total alloocated markkkkkkkk     "+$allocatedTotalMark);
+                
+            },
+            error: function () {
+                alert("failed grab overall mark");
+            }
+        });
